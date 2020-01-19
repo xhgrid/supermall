@@ -35,6 +35,7 @@ import Scroll from '@/components/common/scroll/Scroll'
 import BackTop from '@/components/content/backTop/BackTop'
 
 import { getHomeMultidata, getHomeGoods } from 'network/home'
+import { debounce } from '@/components/common/utils.js'
 
 export default {
   name: 'Home',
@@ -74,6 +75,13 @@ export default {
     this.getHomeGoods('new')
     this.getHomeGoods('sell')
   },
+  mounted () {
+    const refresh = debounce(this.$refs.scroll.refresh, 50)
+    // 3.兄弟组件通信-监听图片加载完成之后刷新事件
+    this.$bus.$on('itemImageLoad', () => {
+      refresh()
+    })
+  },
   methods: {
     /**
      * 事件监听相关的方法
@@ -105,10 +113,9 @@ export default {
       }
     },
     loadMore () {
-      // console.log('上拉加载更多')
+      console.log('上拉加载更多')
       this.getHomeGoods(this.currentType)
-
-      this.$refs.scroll.scroll.refresh()
+      // this.$refs.scroll.scroll.refresh()
     },
     /**
      * 网络请求相关方法
@@ -156,19 +163,19 @@ export default {
 }
 .tabControl {
   background: #fff;
-  position: sticky;
+  /* position: sticky;
   top: 44px;
-  z-index: 9;
+  z-index: 9; */
 }
-.content {
-  height: calc(100% - 44px);
-  /* height:300px; */
-  margin-top: 44px;
-  /* overflow: hidden; */
+/* .content { */
+/* height: calc(100% - 44px); */
+/* height:300px; */
+/* margin-top: 44px; */
+/* overflow: hidden; */
 
-  /* position: absolute; */
-  /* top:0; */
-}
+/* position: absolute; */
+/* top:0; */
+/* } */
 .content {
   overflow: hidden;
 
