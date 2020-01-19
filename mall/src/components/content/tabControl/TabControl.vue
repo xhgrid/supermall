@@ -7,7 +7,7 @@
       :class="{active:index === currentIndex}"
       @click="itemClick(index)"
     >
-      <span >{{item}}</span>
+      <span>{{item}}</span>
     </div>
   </div>
 </template>
@@ -31,6 +31,8 @@ export default {
   methods: {
     itemClick (index) {
       this.currentIndex = index
+      // 子组件将事件传出去
+      this.$emit('tabClick', index)
     }
   }
 }
@@ -46,7 +48,7 @@ export default {
 .tab-control-item {
   flex: 1;
 }
-.active span{
+.active span {
   padding: 5px;
   color: var(--color-tint);
   border-bottom: 3px solid var(--color-tint);

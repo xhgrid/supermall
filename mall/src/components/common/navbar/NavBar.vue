@@ -18,9 +18,10 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .nav-bar {
   display: flex;
+  width: 100vw;
   height: 44px;
   line-height: 44px;
   text-align: center;
@@ -31,6 +32,6 @@ export default {
   width: 60px;
 }
 .center {
-  /* flex: 1; */
+  flex: 1;
 }
 </style>
