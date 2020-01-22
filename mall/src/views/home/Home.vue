@@ -47,7 +47,8 @@ import Scroll from '@/components/common/scroll/Scroll'
 import BackTop from '@/components/content/backTop/BackTop'
 
 import { getHomeMultidata, getHomeGoods } from 'network/home'
-import { debounce } from '@/common/utils'
+// import { debounce } from '@/common/utils'
+import { itemListenerMinxin } from '@/common/mixin'
 
 export default {
   name: 'Home',
@@ -61,6 +62,7 @@ export default {
     Scroll,
     BackTop
   },
+  mixin: [itemListenerMinxin],
   data () {
     return {
       banners: [],
@@ -75,6 +77,7 @@ export default {
       tabOffsetTop: 0, // 记录tabControl的offsetTop
       saveY: 0,
       isTabFixed: false
+      // itemImageListener: null // 放入混入中
     }
   },
   computed: {
@@ -92,7 +95,10 @@ export default {
   },
   deactivated () {
     // keep-alive 组件生命周期 离开时注销
+    // 1.保存y值
     this.saveY = this.$refs.scroll.scroll.y
+    // 2.当离开组件时，取消全局事件监听
+    this.$bus.$off('itemImageLoad', this.itemImageListener)
   },
   created () {
     // 1.请求轮播图等数据
@@ -103,11 +109,14 @@ export default {
     this.getHomeGoods('sell')
   },
   mounted () {
-    const refresh = debounce(this.$refs.scroll.refresh, 50)
-    // 3.兄弟组件通信-监听图片加载完成之后刷新事件
-    this.$bus.$on('itemImageLoad', () => {
-      refresh()
-    })
+    // // 防抖优化 - 每张图片加载完成后都触发，所以进行防抖优化
+    // const refresh = debounce(this.$refs.scroll.refresh, 50)
+
+    // this.itemImageListener = () => {
+    //   refresh()
+    // }
+    // // 3.兄弟组件通信-监听图片加载完成之后刷新事件
+    // this.$bus.$on('itemImageLoad', this.itemImageListener)
   },
   methods: {
     /**

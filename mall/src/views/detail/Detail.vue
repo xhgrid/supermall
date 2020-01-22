@@ -9,28 +9,33 @@
       <detail-shop-info :shop="shop"></detail-shop-info>
       <detail-goods-info :detailInfo="detailInfo" @imageLoad="imageLoad"></detail-goods-info>
       <detail-param-info :paramInfo="paramInfo"></detail-param-info>
-      <detail-comment-info></detail-comment-info>
+      <detail-comment-info :commentInfo="commentInfo"></detail-comment-info>
+      <goods-list :goods="recommends"></goods-list>
     </scroll>
   </div>
 </template>
 
 <script>
 import DetailNavBar from './childComponents/DetailNavBar'
-import { getDetail, Goods, Shop, GoodsParam } from '@/network/detail'
 import DetailSwiper from './childComponents/DetailSwiper'
 import DetailBaseInfo from './childComponents/DetailBaseInfo'
 import DetailShopInfo from './childComponents/DetailShopInfo'
 import DetailGoodsInfo from './childComponents/DetailGoodsInfo'
 import DetailParamInfo from './childComponents/DetailParamInfo'
 import DetailCommentInfo from './childComponents/DetailCommentInfo'
+import GoodsList from '@/components/content/goods/GoodsList'
+
+import { getDetail, Goods, Shop, GoodsParam, getRecommend } from '@/network/detail'
 
 import Scroll from '@/components/common/scroll/Scroll'
+import { itemListenerMinxin } from '@/common/mixin'
 
 export default {
   name: 'Detail',
   props: {
 
   },
+  mixins: [itemListenerMinxin],
   data () {
     return {
       iid: null,
@@ -39,7 +44,10 @@ export default {
       goods: {},
       shop: {},
       detailInfo: {},
-      paramInfo: {}
+      paramInfo: {},
+      commentInfo: {},
+      recommends: []
+      // itemImgListener: null // 放入混入中
     }
   },
   created () {
@@ -67,6 +75,17 @@ export default {
       this.paramInfo = new GoodsParam(data.itemParams.info, data.itemParams.rule)
       console.log(this.paramInfo)
       // console.log(Object.keys(this.paramInfo).length)
+
+      // 6.获取评论信息
+      if (data.rate.cRate !== 0) {
+        this.commentInfo = data.rate.list[0]
+      }
+      console.log(this.commentInfo)
+    })
+    // 3.获取推荐信息
+    getRecommend().then(res => {
+      // console.log(res)
+      this.recommends = res.data.data.list
     })
   },
   methods: {
@@ -74,6 +93,13 @@ export default {
     imageLoad () {
       this.$refs.scroll.refresh()
     }
+  },
+  mounted () {
+
+  },
+  destroyed () { // Detail 组件没有缓存keep-alive 离开时只会调用destoryed，没有keep-alive的生命周期
+    // console.log('destory detail')
+    this.$bus.$off('itemImageLoad', this.itemImgListener)
   },
   components: {
     DetailNavBar,
@@ -83,7 +109,8 @@ export default {
     Scroll,
     DetailGoodsInfo,
     DetailParamInfo,
-    DetailCommentInfo
+    DetailCommentInfo,
+    GoodsList
   }
 }
 </script>

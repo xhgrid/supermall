@@ -27,14 +27,14 @@
 </template>
 
 <script>
-import { formatDate } from 'common/utils';
+import { formatDate } from '@/common/utils'
 export default {
   name: 'DetailCommentInfo',
   props: {
     commentInfo: {
       type: Object,
       default () {
-        return {};
+        return {}
       }
     }
   },
@@ -45,7 +45,9 @@ export default {
   },
   filters: {
     showDate: function (value) {
-      let date = new Date(value * 1000);
+      // 1.将时间戳转成Date对象
+      let date = new Date(value * 1000)
+      // 2.格式化
       return formatDate(date, 'yyyy-MM-dd')
     }
   }

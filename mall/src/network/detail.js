@@ -9,6 +9,12 @@ export function getDetail (iid) {
   })
 }
 
+export function getRecommend () {
+  return request({
+    url: '/recommend'
+  })
+}
+
 // 作用：整合数据 -- 把服务器返回的数据封装到一个类里面
 // 然后new出一个对象来，将对象传到下一个组件里面
 export class Goods {

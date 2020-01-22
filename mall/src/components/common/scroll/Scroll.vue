@@ -58,7 +58,7 @@ export default {
       this.scroll.finishPullUp()
     },
     refresh () {
-      console.log('qqq')
+      console.log('scroll 刷新')
       this.scroll && this.scroll.refresh()
     }
   }
