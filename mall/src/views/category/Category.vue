@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper" ref="aaa">
     <!-- <h2>分类</h2> -->
-    <ul class="content">
+    <!-- <ul class="content">
       <li>分类列表1</li>
       <li>分类列表2</li>
       <li>分类列表3</li>
@@ -102,41 +102,41 @@
       <li>分类列表98</li>
       <li>分类列表99</li>
       <li>分类列表100</li>
-    </ul>
+    </ul> -->
   </div>
 </template>
 
 <script>
-import BScroll from 'better-scroll'
+// import BScroll from 'better-scroll'
 export default {
-  name: 'Category',
-  data () {
-    return {
-      scroll: null
-    }
-  },
-  // 组件创建完之后执行，无法拿取dom
-  created () {
-    // console.log(this.$ref.aaa)//Cannot read property 'aaa' of undefined"
-    // this.scroll = new BScroll(this.$ref.aaa, {})
-  },
-  mounted () {
-    // console.log(this.$refs.aaa)// Cannot read property 'aaa' of undefined"
-    // console.log(document.querySelector('.wrapper'))
+  // name: 'Category',
+  // data () {
+  //   return {
+  //     scroll: null
+  //   }
+  // },
+  // // 组件创建完之后执行，无法拿取dom
+  // created () {
+  //   // console.log(this.$ref.aaa)//Cannot read property 'aaa' of undefined"
+  //   // this.scroll = new BScroll(this.$ref.aaa, {})
+  // },
+  // mounted () {
+  //   // console.log(this.$refs.aaa)// Cannot read property 'aaa' of undefined"
+  //   // console.log(document.querySelector('.wrapper'))
 
-    // 1.创建Scroll对象
-    this.scroll = new BScroll(document.querySelector('.wrapper'), {
-      probeType: 3,
-      pullUpload: true
-    })
-    // console.log(this.scroll)
-    this.scroll.on('scroll', (position) => {
-      console.log(position)
-    })
-    this.scroll.on('pullingUp', () => {
-      '上拉加载更多'
-    })
-  }
+  //   // 1.创建Scroll对象
+  //   this.scroll = new BScroll(document.querySelector('.wrapper'), {
+  //     probeType: 3,
+  //     pullUpload: true
+  //   })
+  //   // console.log(this.scroll)
+  //   this.scroll.on('scroll', (position) => {
+  //     console.log(position)
+  //   })
+  //   this.scroll.on('pullingUp', () => {
+  //     '上拉加载更多'
+  //   })
+  // }
 }
 </script>
 
