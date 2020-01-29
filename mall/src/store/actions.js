@@ -16,12 +16,12 @@ export default {
       if (oldProduct) {
         // oldProduct.count += 1
         commit(ADD_COUNTER, oldProduct)
-        resolve('当前商品数量+1')
+        resolve('加入购物车成功')
       } else {
         payload.count = 1
         // state.cartList.push(payload)
         commit(ADD_TO_CART, payload)
-        resolve('添加新商品')
+        resolve('加入购物车成功')
       }
     })
   }
