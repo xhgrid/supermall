@@ -16,7 +16,7 @@
 
 
 
-|         详情页滚动联动         |      加入购物车toast插件提示       |             购物车             |
-| :----------------------------: | :--------------------------------: | :----------------------------: |
-| ![mall4](screenshot/mall4.png) | ![mall5cart](assets/mall5cart.png) | ![mall6](screenshot/mall6.png) |
+|         详情页滚动联动         |        加入购物车toast插件提示         |             购物车             |
+| :----------------------------: | :------------------------------------: | :----------------------------: |
+| ![mall4](screenshot/mall4.png) | ![mall5cart](screenshot/mall5cart.png) | ![mall6](screenshot/mall6.png) |
 
